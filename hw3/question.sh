@@ -16,7 +16,7 @@ if [[ $# < 1 ]]; then
 fi
 
 if [[ $1 == create ]]; then
-	if [[ $# > 3 ]] || [[ $# < 2]]; then
+	if [ $# > 3 ] || [ $# < 2]; then
 		echo "The wrong number of arguments are given to an option (too few 
 			or too many)" > /dev/stderr
 		exit 1
