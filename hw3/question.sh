@@ -85,9 +85,9 @@ if [[ $1 == answer ]]; then
 		echo "empty question" > /dev/stderr
 		exit 1
 	fi
-	assureDirExists "$HOME/.question/answers/$user"
-	touch "$HOME/.question/answers/$user/$3"
-	echo $content >> "$HOME/.question/answers/$user/$3"
+	assureDirExists "$HOME/.question/answers/$user/$qname"
+	touch "$HOME/.question/answers/$user/$qname/$3"
+	echo $content >> "$HOME/.question/answers/$user/$qname/$3"
 	exit 0
 fi
 
@@ -188,9 +188,6 @@ if [[ $1 == view ]]; then
 						cat "/home/$usr/.question/answers/$user/$qname/$ans"
 						echo "===="
 					done
-					echo $count " " $user "/" $qname
-					cat "/home/$user/.question/questions/$qname"
-					echo "===="
 				fi
 			done < /home/unixtool/data/question/users
 		fi
