@@ -171,7 +171,13 @@ if [[ $1 == view ]]; then
 				 	count=$((count-$(sed -n -e "/^down$/p" "/home/$usr/.question/votes/$user/$qname" | wc -l)))
 				fi
 				for ans in $(find "/home/$usr/.question/answers/$user" -type f -maxdepth 1 -exec basename {} \;); do
-					echo $ans
+					count=0
+					while read u; do
+						if [[ -f "/home/$u/.question/answer/$user/$ans" ]]; then
+				 			count=$((count+$(sed -n -e "/up $user\/$ans/d" "/home/$usr/.question/votes/$user/$qname" | wc -l)))
+				 			count=$((count-$(sed -n -e "/down $user\/$ans/d" "/home/$usr/.question/votes/$user/$qname" | wc -l)))
+						fi
+					done < /home/unixtool/data/question/users
 				done
 			done < /home/unixtool/data/question/users
 			echo $count " " $user "/" $qname
