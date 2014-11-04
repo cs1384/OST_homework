@@ -106,7 +106,7 @@ if [[ $1 == list ]]; then
 		fi
 	else
 		while read line; do
-			echo $line ":"
+			echo $line":"
 			find "/home/$line/.question/questions" -type f -maxdepth 1 -exec basename {} \;
 		done < "/home/unixtool/data/question/users"
 	fi
