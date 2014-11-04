@@ -43,7 +43,6 @@ if [[ $1 == create ]]; then
 		echo "empty question" > /dev/stderr
 		exit 1
 	fi
-	#assureDirExists "$HOME/question/questions"
 	assureDirExists "$HOME/.question/questions"
 	touch "$HOME/.question/questions/$2"
 	echo $content >> "$HOME/.question/questions/$2"
@@ -62,8 +61,7 @@ if [[ $1 == answer ]]; then
 	fi
 	user=$(echo $2 | cut -d/ -f1)
 	qname=$(echo $2 | cut -d/ -f2)
-	if [[ ! (-f "/Users/$user/.question/questions/$qname") ]]; then
-	#if [[ ! (-f "/home/$user/.question/questions/$qname") ]]; then
+	if [[ ! (-f "/home/$user/.question/questions/$qname") ]]; then
 		echo "No such question exists" > /dev/stderr
 		exit 1
 	fi
@@ -101,20 +99,16 @@ if [[ $1 == list ]]; then
 		exit 1
 	fi
 	if [[ ! $2 == "" ]]; then
-		if [[ ! (-d "/Users/$2/.question") ]]; then
-		#if [[ ! (-d "/home/$2/.question") ]]; then
+		if [[ ! (-d "/home/$2/.question") ]]; then
 			echo "No such user" > /dev/stderr
 			exit 1
 		else
-			find "/Users/$2/.question/questions" -type f -maxdepth 1 -exec basename {} \;
-			#find "/home/$2/.question/questions" -type f -maxdepth 1 -exec basename {} \;
+			find "/home/$2/.question/questions" -type f -maxdepth 1 -exec basename {} \;
 		fi
 	else
 		while read line; do
-			find "/Users/$line/.question/questions" -type f -maxdepth 1 -exec basename {} \;
-			#find "/home/$line/.question/questions" -type f -maxdepth 1 -exec basename {} \;
-		done < "/Users/Tin/Study/Open Source Tool/homework/hw3/users"
-		#done < /home/unixtool/data/question/users 
+			find "/home/$line/.question/questions" -type f -maxdepth 1 -exec basename {} \;
+		done < "/home/unixtool/data/question/users"
 	fi
 	exit 0
 fi
@@ -135,8 +129,7 @@ if [[ $1 == vote ]]; then
 	fi
 	user=$(echo $3 | cut -d/ -f1)
 	qname=$(echo $3 | cut -d/ -f2)
-	if [[ ! (-f "/Users/$user/.question/questions/$qname") ]]; then
-	#if [[ ! (-f "/home/$user/.question/questions/$qname") ]]; then
+	if [[ ! (-f "/home/$user/.question/questions/$qname") ]]; then
 		echo "No such question exists" > /dev/stderr
 		exit 1
 	fi
@@ -167,24 +160,17 @@ if [[ $1 == view ]]; then
 		fi
 		user=$(echo $file | cut -d/ -f1)
 		qname=$(echo $file | cut -d/ -f2)
-		if [[ ! (-f "/Users/$user/.question/questions/$qname") ]]; then
-		#if [[ ! (-f "/home/$user/.question/questions/$qname") ]]; then
+		if [[ ! (-f "/home/$user/.question/questions/$qname") ]]; then
 			echo "No such question exists" > /dev/stderr
 			exit 1
 		else
 			count=0
 			while read usr; do
-				if [[ -f "/Users/$usr/.question/vote/$qname" ]]; then
-				#if [[ -f "/home/$usr/.question/vote/$qname" ]]; then
-				 	$count = $count + $(sed -n -i -e "/up/p" "/Users/$usr/.question/vote/$qname" | wc -l)
-				 	#$count = $count + $(sed -n -i -e "/up/p" "/home/$usr/.question/vote/$qname" | wc -l)
-				 	$count = $count - $(sed -n -i -e "/down/p" "/Users/$usr/.question/vote/$qname" | wc -l)
-				 	#$count = $count - $(sed -n -i -e "/down/p" "/home/$usr/.question/vote/$qname" | wc -l)
+				if [[ -f "/home/$usr/.question/vote/$qname" ]]; then
+				 	$count = $count + $(sed -n -i -e "/up/p" "/home/$usr/.question/vote/$qname" | wc -l)
+				 	$count = $count - $(sed -n -i -e "/down/p" "/home/$usr/.question/vote/$qname" | wc -l)
 				fi 
-				 "/Users/$line/.question/vote/$" -type f -maxdepth 1 -exec basename {} \;
-				#find "/home/$line/.question/questions" -type f -maxdepth 1 -exec basename {} \;
-			done < "/Users/Tin/Study/Open Source Tool/homework/hw3/users"
-			#done < /home/unixtool/data/question/users
+			done < /home/unixtool/data/question/users
 		fi
 
 	fi
