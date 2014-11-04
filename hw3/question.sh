@@ -179,16 +179,22 @@ if [[ $1 == view ]]; then
 					for ans in $(find "/home/$usr/.question/answers/$user/$qname" -type f -maxdepth 1 -exec basename {} \;); do
 						count=0
 						while read u; do
-							if [[ -f "/home/$u/.question/answer/$user/$qname/$ans" ]]; then
-						 		count=$((count+$(sed -n -e "/up $user\/$ans/d" "/home/$usr/.question/votes/$user/$qname" | wc -l)))
-						 		count=$((count-$(sed -n -e "/down $user\/$ans/d" "/home/$usr/.question/votes/$user/$qname" | wc -l)))
+							if [[ -f "/home/$u/.question/votes/$user/$qname" ]]; then
+						 		count=$((count+$(sed -n -e "/up $user\/$ans/d" "/home/$u/.question/votes/$user/$qname" | wc -l)))
+						 		count=$((count-$(sed -n -e "/down $user\/$ans/d" "/home/$u/.question/votes/$user/$qname" | wc -l)))
 							fi
 						done < /home/unixtool/data/question/users
+						echo $count " " $usr "@" $qname ":" $ans
+						cat "/home/$usr/.question/answers/$user/$qname/$ans"
+						echo "===="
 					done
+					echo $count " " $user "/" $qname
+					cat "/home/$user/.question/questions/$qname"
+					echo "===="
+				fi
 			done < /home/unixtool/data/question/users
 		fi
 	done
-
 fi
 	
 
