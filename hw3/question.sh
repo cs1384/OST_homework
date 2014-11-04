@@ -141,7 +141,13 @@ if [[ $1 == vote ]]; then
 		sed -i -e "/^up$/d" "$HOME/.question/votes/$user/$qname"
 		echo $2 >> "$HOME/.question/votes/$user/$qname"
 	else
-		if [[ -f $HOME/.question/answers/$4 ]]; then
+		if [[ ! $4 = */* ]]; then
+			echo "Invalid arguments" > /dev/stderr
+			exit 1
+		fi
+		auser=$(echo $4 | cut -d/ -f1)
+		aname=$(echo $4 | cut -d/ -f2)
+		if [[ -f /home/$auser/.question/answers/$user/$qname/$aname ]]; then
 			echo "The answer id does note exist" > /dev/stderr
 			exit 1
 		fi
@@ -180,9 +186,9 @@ if [[ $1 == view ]]; then
 					for ans in $(find "/home/$usr/.question/answers/$user/$qname" -type f -maxdepth 1 -exec basename {} \;); do
 						count=0
 						while read u; do
-							if [[ -f "/home/$u/.question/votes/$user/$qname" ]]; then
-						 		count=$((count+$(sed -n -e "/up $user\/$ans/d" "/home/$u/.question/votes/$user/$qname" | wc -l)))
-						 		count=$((count-$(sed -n -e "/down $user\/$ans/d" "/home/$u/.question/votes/$user/$qname" | wc -l)))
+							if [[ -f "/home/$u/.question/votes/$usr/$qname" ]]; then
+						 		count=$((count+$(sed -n -e "/up $usr\/$ans/d" "/home/$u/.question/votes/$user/$qname" | wc -l)))
+						 		count=$((count-$(sed -n -e "/down $usr\/$ans/d" "/home/$u/.question/votes/$user/$qname" | wc -l)))
 							fi
 						done < /home/unixtool/data/question/users
 						echo $count " " $usr "@" $qname ":" $ans
