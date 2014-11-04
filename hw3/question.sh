@@ -16,7 +16,7 @@ if [[ $# < 1 ]]; then
 fi
 
 if [[ $1 == create ]]; then
-	if [[ $# > 3 ]]; then
+	if [[ $# > 3 ]] || [[ $# < 2]]; then
 		echo "The wrong number of arguments are given to an option (too few 
 			or too many)" > /dev/stderr
 		exit 1
@@ -34,7 +34,6 @@ if [[ $1 == create ]]; then
 	else
 		read content
 	fi
-	echo $content
 	if [[ $content = *====* ]]; then
 		echo "question contains \"====\"" > /dev/stderr
 		exit 1
