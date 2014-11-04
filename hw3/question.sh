@@ -49,7 +49,6 @@ if [[ $1 == create ]]; then
 fi
 
 if [[ $1 == answer ]]; then
-	echo $#
 	if [ $# -gt 4 ] || [ $# -lt 3]; then
 		echo "The wrong number of arguments are given to an option (too few 
 			or too many)" > /dev/stderr
@@ -147,7 +146,7 @@ if [[ $1 == vote ]]; then
 		fi
 		auser=$(echo $4 | cut -d/ -f1)
 		aname=$(echo $4 | cut -d/ -f2)
-		if [[ -f /home/$auser/.question/answers/$user/$qname/$aname ]]; then
+		if [[ -f "/home/$auser/.question/answers/$user/$qname/$aname" ]]; then
 			echo "The answer id does note exist" > /dev/stderr
 			exit 1
 		fi
@@ -161,6 +160,11 @@ if [[ $1 == vote ]]; then
 fi
 
 if [[ $1 == view ]]; then
+	if [ $# -ne 2 ]; then
+		echo "The wrong number of arguments are given to an option (too few 
+			or too many)" > /dev/stderr
+		exit 1
+	fi
 	for file in "$@"; do
 		if [[ $file == view ]]; then
 			continue
