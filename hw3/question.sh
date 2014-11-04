@@ -106,7 +106,7 @@ if [[ $1 == list ]]; then
 		fi
 	else
 		while read line; do
-			echo $line
+			echo $line ":"
 			find "/home/$line/.question/questions" -type f -maxdepth 1 -exec basename {} \;
 		done < "/home/unixtool/data/question/users"
 	fi
@@ -167,10 +167,15 @@ if [[ $1 == view ]]; then
 			count=0
 			while read usr; do
 				if [[ -f "/home/$usr/.question/vote/$qname" ]]; then
-				 	$count = $count + $(sed -n -i -e "/up/p" "/home/$usr/.question/vote/$qname" | wc -l)
-				 	$count = $count - $(sed -n -i -e "/down/p" "/home/$usr/.question/vote/$qname" | wc -l)
+				 	$count = $count + $(sed -n -i -e "/^up$/p" "/home/$usr/.question/vote/$qname" | wc -l)
+				 	$count = $count - $(sed -n -i -e "/^down$/p" "/home/$usr/.question/vote/$qname" | wc -l)
 				fi 
 			done < /home/unixtool/data/question/users
+			echo $count " " $user "/" $qname
+			cat "/home/$user/.question/questions/$qname"
+			echo "===="
+
+
 		fi
 
 	fi
