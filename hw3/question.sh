@@ -49,7 +49,8 @@ if [[ $1 == create ]]; then
 fi
 
 if [[ $1 == answer ]]; then
-	if [[ $# > 4 ]]; then
+	echo $#
+	if [ $# > 4 ] || [ $# < 3]; then
 		echo "The wrong number of arguments are given to an option (too few 
 			or too many)" > /dev/stderr
 		exit 1
@@ -73,7 +74,7 @@ if [[ $1 == answer ]]; then
 		exit 1
 	fi
 	if [[ $# > 3 ]]; then
-		content=$(echo $3)
+		content=$(echo $4)
 	else
 		read content
 	fi
