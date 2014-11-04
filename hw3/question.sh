@@ -166,9 +166,9 @@ if [[ $1 == view ]]; then
 		else
 			count=0
 			while read usr; do
-				if [[ -f "/home/$usr/.question/vote/$qname" ]]; then
-				 	$count = $count + $(sed -n -i -e "/^up$/p" "/home/$usr/.question/vote/$qname" | wc -l)
-				 	$count = $count - $(sed -n -i -e "/^down$/p" "/home/$usr/.question/vote/$qname" | wc -l)
+				if [[ -f "/home/$usr/.question/vote/$user/$qname" ]]; then
+				 	count=$((count+$(sed -n -e "/^up$/p" "/home/$usr/.question/votes/$user/$qname" | wc -l)))
+				 	count=$((count-$(sed -n -e "/^down$/p" "/home/$usr/.question/votes/$user/$qname" | wc -l)))
 				fi 
 			done < /home/unixtool/data/question/users
 			echo $count " " $user "/" $qname
@@ -177,10 +177,6 @@ if [[ $1 == view ]]; then
 
 
 		fi
-
-	fi
-		
-		
 	done
 
 fi
