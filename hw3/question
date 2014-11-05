@@ -1,6 +1,7 @@
 #!/bin/bash
 
 function assureDirExists {
+	echo $1
 	if [[ ! -d $1 ]]; then
 		mkdir -m 755 $1
 		exit 0
