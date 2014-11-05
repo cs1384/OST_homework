@@ -1,12 +1,11 @@
 #!/bin/bash
 
 function assureDirExists {
-	echo $1
 	if [[ ! -d $1 ]]; then
 		mkdir -m 755 $1
-		exit 0
+		return 0
 	else
-		exit 1
+		return 1
 	fi
 }
 
