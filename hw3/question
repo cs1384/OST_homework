@@ -3,9 +3,9 @@
 function assureDirExists {
 	dir=$(echo $1 | sed -e 's/ /\\ /')
 	echo $dir
-	if [[ ! -d $dir ]]; then
+	if [[ ! -d $1 ]]; then
 		IFS=
-		mkdir -m 755 $dir
+		mkdir -m 755 $1
 		return 0
 	else
 		return 1
