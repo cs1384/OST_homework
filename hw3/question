@@ -95,11 +95,11 @@ if [[ $1 == answer ]]; then
 	assureDirExists "$HOME/.question/answers"
 	assureDirExists "$HOME/.question/answers/$user"
 	assureDirExists "$HOME/.question/answers/$user/$qname"
-	file=$(echo "$HOME/.question/answers/$user/$qname/$3" | sed -e 's/ /\\ /g')
+	#file=$(echo "$HOME/.question/answers/$user/$qname/$3" | sed -e 's/ /\\ /g')
 	IFS=
-	touch $file
-	chmod 705 $file
-	echo $content >> $file
+	touch "$HOME/.question/answers/$user/$qname/$3"
+	chmod 705 "$HOME/.question/answers/$user/$qname/$3"
+	echo $content >> "$HOME/.question/answers/$user/$qname/$3"
 	exit 0
 fi
 
