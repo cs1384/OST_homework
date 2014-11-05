@@ -182,7 +182,7 @@ if [[ $1 == view ]]; then
 				 	count=$((count-$(sed -n -e "/^down$/p" "/home/$usr/.question/votes/$user/$qname" | wc -l)))
 				fi
 			done < /home/unixtool/data/question/users
-			echo $count " " $user "/" $qname
+			echo $count" "$user"/"$qname
 			cat "/home/$user/.question/questions/$qname"
 			echo "===="
 			while read usr; do
@@ -191,12 +191,12 @@ if [[ $1 == view ]]; then
 						count=0
 						while read u; do
 							if [[ -f "/home/$u/.question/votes/$usr/$qname" ]]; then
-								echo "/home/$u/.question/votes/$user/$qname"
-						 		count=$((count+$(sed -n -e "/up $usr\/$ans/d" "/home/$u/.question/votes/$user/$qname" | wc -l)))
-						 		count=$((count-$(sed -n -e "/down $usr\/$ans/d" "/home/$u/.question/votes/$user/$qname" | wc -l)))
+								echo "/home/$u/.question/votes/$usr/$qname"
+						 		count=$((count+$(sed -n -e "/up $usr\/$ans/p" "/home/$u/.question/votes/$user/$qname" | wc -l)))
+						 		count=$((count-$(sed -n -e "/down $usr\/$ans/p" "/home/$u/.question/votes/$user/$qname" | wc -l)))
 							fi
 						done < /home/unixtool/data/question/users
-						echo $count " " $usr "@" $qname ":" $ans
+						echo $count" "$usr"/"$ans" @"$qname
 						cat "/home/$usr/.question/answers/$user/$qname/$ans"
 						echo "===="
 					done
