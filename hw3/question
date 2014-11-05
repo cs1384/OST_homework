@@ -2,9 +2,7 @@
 
 function assureDirExists {
 	if [[ ! -d $1 ]]; then
-		echo $1
-		mkdir -p $1
-		chmod -R 755 $1
+		mkdir -m 755 -p $1
 		exit 0
 	else
 		exit 1
