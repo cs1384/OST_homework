@@ -2,8 +2,10 @@
 
 function assureDirExists {
 	if [[ ! -d $1 ]]; then
+		SAVEIFS=$IFS
 		IFS=
 		mkdir -m 755 $1
+		IFS=$SAVEIFS
 		return 0
 	else
 		return 1
@@ -93,10 +95,12 @@ if [[ $1 == answer ]]; then
 	assureDirExists "$HOME/.question/answers"
 	assureDirExists "$HOME/.question/answers/$user"
 	assureDirExists "$HOME/.question/answers/$user/$qname"
+	SAVEIFS=$IFS
 	IFS=
 	touch "$HOME/.question/answers/$user/$qname/$3"
 	chmod 705 "$HOME/.question/answers/$user/$qname/$3"
 	echo $content >> "$HOME/.question/answers/$user/$qname/$3"
+	IFS=SAVEIFS
 	exit 0
 fi
 
@@ -208,6 +212,8 @@ if [[ $1 == view ]]; then
 				if [[ -d "/home/$usr/.question/answers/$user/$qname" ]]; then
 					ls "/home/$usr/.question/answers/$user/$qname"
 					find "/home/$usr/.question/answers/$user/$qname" -type f -maxdepth 1 -exec basename {} \;
+					SAVEIFS=$IFS
+					IFS=$(echo -en "\n\b")
 					for ans in $(ls "/home/$usr/.question/answers/$user/$qname"); do
 						count=0
 						echo $ans
@@ -221,6 +227,7 @@ if [[ $1 == view ]]; then
 						cat "/home/$usr/.question/answers/$user/$qname/$ans"
 						echo "===="
 					done
+					IFS=$SAVEIFS
 				fi
 			done < /home/unixtool/data/question/users
 		fi
