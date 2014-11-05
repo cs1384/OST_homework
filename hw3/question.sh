@@ -105,7 +105,7 @@ if [[ $1 == list ]]; then
 			exit 1
 		else
 			for ans in $(find "/home/$2/.question/questions" -maxdepth 1 -type f -exec basename {} \;); do
-				echo $line"/"$ans
+				echo $2"/"$ans
 			done
 		fi
 	else
