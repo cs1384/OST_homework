@@ -32,6 +32,7 @@ if [[ $1 == create ]]; then
 	if [[ $# > 2 ]]; then
 		content=$(echo $3)
 	else
+		echo "please enter the question:"
 		read content
 	fi
 	if [[ $content = *====* ]]; then
@@ -76,6 +77,7 @@ if [[ $1 == answer ]]; then
 	if [[ $# > 3 ]]; then
 		content=$(echo $4)
 	else
+		echo "please enter the answer:"
 		read content
 	fi
 	if [[ $content = *====* ]]; then
@@ -111,7 +113,7 @@ if [[ $1 == list ]]; then
 	else
 		while read line; do
 			for ans in $(find "/home/$line/.question/questions" -maxdepth 1 -type f -exec basename {} \;); do
-				echo $line"/"$ans
+				echo $line"/$ans"
 			done
 		done < "/home/unixtool/data/question/users"
 	fi
