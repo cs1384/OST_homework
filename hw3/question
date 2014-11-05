@@ -1,8 +1,6 @@
 #!/bin/bash
 
 function assureDirExists {
-	dir=$(echo $1 | sed -e 's/ /\\ /')
-	echo $dir
 	if [[ ! -d $1 ]]; then
 		IFS=
 		mkdir -m 755 $1
@@ -95,7 +93,6 @@ if [[ $1 == answer ]]; then
 	assureDirExists "$HOME/.question/answers"
 	assureDirExists "$HOME/.question/answers/$user"
 	assureDirExists "$HOME/.question/answers/$user/$qname"
-	#file=$(echo "$HOME/.question/answers/$user/$qname/$3" | sed -e 's/ /\\ /g')
 	IFS=
 	touch "$HOME/.question/answers/$user/$qname/$3"
 	chmod 705 "$HOME/.question/answers/$user/$qname/$3"
@@ -209,6 +206,7 @@ if [[ $1 == view ]]; then
 			echo "===="
 			while read usr; do
 				if [[ -d "/home/$usr/.question/answers/$user/$qname" ]]; then
+					find "/home/$usr/.question/answers/$user/$qname" -type f -maxdepth 1 -exec basename {} \;
 					for ans in $(find "/home/$usr/.question/answers/$user/$qname" -type f -maxdepth 1 -exec basename {} \;); do
 						count=0
 						while read u; do
