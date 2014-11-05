@@ -104,7 +104,9 @@ if [[ $1 == list ]]; then
 			echo "No such user" > /dev/stderr
 			exit 1
 		else
-			find "/home/$2/.question/questions" -maxdepth 1 -type f -exec basename {} \;
+			for ans in $(find "/home/$2/.question/questions" -maxdepth 1 -type f -exec basename {} \;); do
+				echo $line"/"$ans
+			done
 		fi
 	else
 		while read line; do
