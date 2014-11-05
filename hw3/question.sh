@@ -195,7 +195,7 @@ if [[ $1 == view ]]; then
 						 		count=$((count-$(sed -n -e "/down $usr\/$ans/p" "/home/$u/.question/votes/$user/$qname" | wc -l)))
 							fi
 						done < /home/unixtool/data/question/users
-						echo $count" "$usr"/"$ans" @"$qname
+						echo $count" "$usr"/"$ans" @"$user"/"$qname
 						cat "/home/$usr/.question/answers/$user/$qname/$ans"
 						echo "===="
 					done
@@ -203,7 +203,12 @@ if [[ $1 == view ]]; then
 			done < /home/unixtool/data/question/users
 		fi
 	done
+	exit 0
 fi
+
+echo "No such option exists" > /dev/stderr
+exit 1
+
 	
 
 	
