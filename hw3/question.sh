@@ -26,7 +26,7 @@ if [[ $1 == create ]]; then
 		exit 1
 	fi
 	if [[ -f $HOME/.question/questions/$2 ]]; then
-		echo "The question id exists already" > /dev/stderr
+		echo "The question name exists already" > /dev/stderr
 		exit 1
 	fi
 	if [[ $# > 2 ]]; then
@@ -67,11 +67,11 @@ if [[ $1 == answer ]]; then
 		exit 1
 	fi
 	if [[ $3 = */* ]]; then
-		echo "Invalid arguments" > /dev/stderr
+		echo "Invalid arguments:""$3" > /dev/stderr
 		exit 1
 	fi
 	if [[ -f $HOME/.question/answers/$3 ]]; then
-		echo "The answer id exists already" > /dev/stderr
+		echo "The answer name exists already" > /dev/stderr
 		exit 1
 	fi
 	if [[ $# > 3 ]]; then
