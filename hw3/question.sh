@@ -35,15 +35,16 @@ if [[ $1 == create ]]; then
 		read content
 	fi
 	if [[ $content = *====* ]]; then
-		echo "question contains \"====\"" > /dev/stderr
+		echo "not added! question contains \"====\"" > /dev/stderr
 		exit 1
 	fi
 	if [[ $content = "" ]]; then
-		echo "empty question" > /dev/stderr
+		echo "not added! empty question" > /dev/stderr
 		exit 1
 	fi
 	assureDirExists "$HOME/.question/questions"
 	touch "$HOME/.question/questions/$2"
+	chmod 705 "$HOME/.question/questions/$2"
 	echo $content >> "$HOME/.question/questions/$2"
 	exit 0
 fi
@@ -87,6 +88,7 @@ if [[ $1 == answer ]]; then
 	fi
 	assureDirExists "$HOME/.question/answers/$user/$qname"
 	touch "$HOME/.question/answers/$user/$qname/$3"
+	chmod 705 "$HOME/.question/answers/$user/$qname/$3"
 	echo $content >> "$HOME/.question/answers/$user/$qname/$3"
 	exit 0
 fi
@@ -136,8 +138,9 @@ if [[ $1 == vote ]]; then
 	if [[ $4 == "" ]]; then
 		assureDirExists "$HOME/.question/votes/$user"
 		touch "$HOME/.question/votes/$user/$qname"
+		chmod 705 "$HOME/.question/votes/$user/$qname"
 		sed -i -e "/^up$/d" "$HOME/.question/votes/$user/$qname"
-		sed -i -e "/^up$/d" "$HOME/.question/votes/$user/$qname"
+		sed -i -e "/^down$/d" "$HOME/.question/votes/$user/$qname"
 		echo $2 >> "$HOME/.question/votes/$user/$qname"
 	else
 		if [[ ! $4 = */* ]]; then
@@ -152,8 +155,9 @@ if [[ $1 == vote ]]; then
 		fi
 		assureDirExists "$HOME/.question/votes/$user"
 		touch "$HOME/.question/votes/$user/$qname"
-		sed -i -e "/up $user\/$4/d" "$HOME/.question/votes/$user/$qname"
-		sed -i -e "/down $user\/$4/d" "$HOME/.question/votes/$user/$qname"
+		chmod 705 "$HOME/.question/votes/$user/$qname"
+		sed -i -e "/up $auser\/$aname/d" "$HOME/.question/votes/$user/$qname"
+		sed -i -e "/down $auser\/$aname/d" "$HOME/.question/votes/$user/$qname"
 		echo $2" "$auser"/"$aname >> "$HOME/.question/votes/$user/$qname"
 	fi
 	exit 0
