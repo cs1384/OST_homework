@@ -104,12 +104,12 @@ if [[ $1 == list ]]; then
 			echo "No such user" > /dev/stderr
 			exit 1
 		else
-			find "/home/$2/.question/questions" -type f -maxdepth 1 -exec basename {} \;
+			find "/home/$2/.question/questions" -maxdepth 1 -type f -exec basename {} \;
 		fi
 	else
 		while read line; do
 			echo $line":"
-			find "/home/$line/.question/questions" -type f -maxdepth 1 -exec basename {} \;
+			find "/home/$line/.question/questions" -maxdepth 1 -type f -exec basename {} \;
 		done < "/home/unixtool/data/question/users"
 	fi
 	exit 0
