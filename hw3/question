@@ -208,7 +208,7 @@ if [[ $1 == view ]]; then
 				if [[ -d "/home/$usr/.question/answers/$user/$qname" ]]; then
 					ls "/home/$usr/.question/answers/$user/$qname"
 					find "/home/$usr/.question/answers/$user/$qname" -type f -maxdepth 1 -exec basename {} \;
-					for ans in $(find "/home/$usr/.question/answers/$user/$qname" -type f -maxdepth 1 -exec basename {} \;); do
+					for ans in $(ls "/home/$usr/.question/answers/$user/$qname"); do
 						count=0
 						echo $ans
 						while read u; do
