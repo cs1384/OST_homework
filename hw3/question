@@ -209,6 +209,7 @@ if [[ $1 == view ]]; then
 					find "/home/$usr/.question/answers/$user/$qname" -type f -maxdepth 1 -exec basename {} \;
 					for ans in $(find "/home/$usr/.question/answers/$user/$qname" -type f -maxdepth 1 -exec basename {} \;); do
 						count=0
+						echo $ans
 						while read u; do
 							if [[ -f "/home/$u/.question/votes/$usr/$qname" ]]; then
 						 		count=$((count+$(sed -n -e "/up $usr\/$ans/p" "/home/$u/.question/votes/$user/$qname" | wc -l)))
