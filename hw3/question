@@ -215,16 +215,13 @@ if [[ $1 == view ]]; then
 					for ans in $(ls "/home/$usr/.question/answers/$user/$qname"); do
 						count=0
 						while read u; do
-							
-							
-							echo "/home/$u/.question/votes/$usr/$qname"
-							if [[ -f "/home/$u/.question/votes/$usr/$qname" ]]; then
+							#if [[ -f "/home/$u/.question/votes/$usr/$qname" ]]; then
+							if [[ -f "/home/ytl264/WebSearchEngine/hello world" ]]; then
 								echo "/home/$u/.question/votes/$user/$qname"
 								echo "up $usr\/$ans"
 						 		count=$((count+$(sed -n -e "/up $usr\/$ans/p" "/home/$u/.question/votes/$user/$qname" | wc -l)))
 						 		count=$((count-$(sed -n -e "/down $usr\/$ans/p" "/home/$u/.question/votes/$user/$qname" | wc -l)))
 							fi
-							
 						done < /home/unixtool/data/question/users
 						echo $count" "$usr"/"$ans" @"$user"/"$qname
 						cat "/home/$usr/.question/answers/$user/$qname/$ans"
