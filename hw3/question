@@ -203,9 +203,9 @@ if [[ $1 == view ]]; then
 				if [[ -f "/home/$usr/.question/votes/$user/$qname" ]]; then
 					echo $count
 					echo "/home/$usr/.question/votes/$user/$qname"
-				 	count=$((count+$(sed -n -e "/^up$/p" "/home/$usr/.question/votes/$user/$qname" | wc -l)))
+				 	count=$((count+$(sed -n -e "/^up\s*$/p" "/home/$usr/.question/votes/$user/$qname" | wc -l)))
 				 	echo $count
-				 	count=$((count-$(sed -n -e "/^down$/p" "/home/$usr/.question/votes/$user/$qname" | wc -l)))
+				 	count=$((count-$(sed -n -e "/^down\s*$/p" "/home/$usr/.question/votes/$user/$qname" | wc -l)))
 				fi
 			done < /home/unixtool/data/question/users
 			echo $count" "$user"/"$qname
