@@ -177,7 +177,7 @@ if [[ $1 == view ]]; then
 		user=$(echo $file | cut -d/ -f1)
 		qname=$(echo $file | cut -d/ -f2)
 		if [[ ! (-f "/home/$user/.question/questions/$qname") ]]; then
-			echo "No such question exists" > /dev/stderr
+			echo "No such question id exists: ""$file" > /dev/stderr
 			exit 1
 		else
 			count=0
