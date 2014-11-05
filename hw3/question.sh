@@ -62,7 +62,7 @@ if [[ $1 == answer ]]; then
 	user=$(echo $2 | cut -d/ -f1)
 	qname=$(echo $2 | cut -d/ -f2)
 	if [[ ! (-f "/home/$user/.question/questions/$qname") ]]; then
-		echo "No such question exists" > /dev/stderr
+		echo "No such question: "$user"/"$qname > /dev/stderr
 		exit 1
 	fi
 	if [[ $3 = */* ]]; then
@@ -108,8 +108,9 @@ if [[ $1 == list ]]; then
 		fi
 	else
 		while read line; do
-			echo $line":"
-			find "/home/$line/.question/questions" -maxdepth 1 -type f -exec basename {} \;
+			for ans in $(find "/home/$line/.question/questions" -maxdepth 1 -type f -exec basename {} \;); do
+				echo $line"/"$$ans
+			done
 		done < "/home/unixtool/data/question/users"
 	fi
 	exit 0
