@@ -109,7 +109,7 @@ if [[ $1 == list ]]; then
 	else
 		while read line; do
 			for ans in $(find "/home/$line/.question/questions" -maxdepth 1 -type f -exec basename {} \;); do
-				echo $line"/"$$ans
+				echo $line"/"$ans
 			done
 		done < "/home/unixtool/data/question/users"
 	fi
