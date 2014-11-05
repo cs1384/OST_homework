@@ -217,7 +217,7 @@ if [[ $1 == view ]]; then
 						while read u; do
 							file=$(echo "/home/$u/.question/votes/$usr/$qname")
 							echo $file
-							if [[ -f /home/ytl264/.question/votes/ytl264/first question ]]; then
+							if [[ -f "/home/ytl264/.question/votes/ytl264/first question" ]]; then
 							#if [[ -f "/home/ytl264/.question/votes/cz764/first question" ]]; then
 								echo "/home/$u/.question/votes/$user/$qname"
 								echo "up $usr\/$ans"
