@@ -216,7 +216,7 @@ if [[ $1 == view ]]; then
 						count=0
 						while read u; do
 							SAVEIFS2=$IFS
-							IFS=
+							IFS=$SAVEIFS
 							echo hihi
 							if [[ -f "/home/$u/.question/votes/$usr/$qname" ]]; then
 								echo "/home/$u/.question/votes/$user/$qname"
@@ -224,7 +224,7 @@ if [[ $1 == view ]]; then
 						 		count=$((count+$(sed -n -e "/up $usr\/$ans/p" "/home/$u/.question/votes/$user/$qname" | wc -l)))
 						 		count=$((count-$(sed -n -e "/down $usr\/$ans/p" "/home/$u/.question/votes/$user/$qname" | wc -l)))
 							fi
-							IFS=SAVEIFS2
+							IFS=$SAVEIFS2
 						done < /home/unixtool/data/question/users
 						echo $count" "$usr"/"$ans" @"$user"/"$qname
 						cat "/home/$usr/.question/answers/$user/$qname/$ans"
