@@ -22,7 +22,7 @@ if [[ $1 == create ]]; then
 		exit 1
 	fi
 	if [[ $2 = */* ]]; then
-		echo "Invalid arguments" > /dev/stderr
+		echo "Invalid arguments ""$2" > /dev/stderr
 		exit 1
 	fi
 	if [[ -f $HOME/.question/questions/$2 ]]; then
@@ -57,7 +57,7 @@ if [[ $1 == answer ]]; then
 		exit 1
 	fi
 	if [[ ! $2 = */* ]]; then
-		echo "Invalid arguments" > /dev/stderr
+		echo "Invalid arguments ""$2" > /dev/stderr
 		exit 1
 	fi
 	user=$(echo $2 | cut -d/ -f1)
@@ -67,10 +67,10 @@ if [[ $1 == answer ]]; then
 		exit 1
 	fi
 	if [[ $3 = */* ]]; then
-		echo "Invalid arguments:""$3" > /dev/stderr
+		echo "Invalid arguments: ""$3" > /dev/stderr
 		exit 1
 	fi
-	if [[ -f $HOME/.question/answers/$3 ]]; then
+	if [[ -f $HOME/.question/answers/$user/$qname/$3 ]]; then
 		echo "The answer name exists already" > /dev/stderr
 		exit 1
 	fi
@@ -81,11 +81,11 @@ if [[ $1 == answer ]]; then
 		read content
 	fi
 	if [[ $content = *====* ]]; then
-		echo "question contains \"====\"" > /dev/stderr
+		echo "not added! the answer contains \"====\"" > /dev/stderr
 		exit 1
 	fi
 	if [[ $content = "" ]]; then
-		echo "empty question" > /dev/stderr
+		echo "not added! empty answer" > /dev/stderr
 		exit 1
 	fi
 	assureDirExists "$HOME/.question/answers/$user/$qname"
