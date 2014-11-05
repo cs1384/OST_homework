@@ -96,7 +96,7 @@ if [[ $1 == answer ]]; then
 fi
 
 if [[ $1 == list ]]; then
-	if [[ $# > 2 ]]; then
+	if [ $# -gt 2 ] || [ $# -lt 1 ]; then
 		echo "The wrong number of arguments are given to an option (too few 
 			or too many)" > /dev/stderr
 		exit 1
@@ -117,7 +117,7 @@ if [[ $1 == list ]]; then
 fi
 
 if [[ $1 == vote ]]; then
-	if [[ $# > 4 ]]; then
+	if [ $# -gt 4 ] || [ $# -lt 3 ]; then
 		echo "The wrong number of arguments are given to an option (too few 
 			or too many)" > /dev/stderr
 		exit 1
