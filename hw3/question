@@ -2,7 +2,7 @@
 
 function assureDirExists {
 	if [[ ! -d $1 ]]; then
-		mkdir -m 755 -p $1
+		mkdir -p -m 755 $1
 		exit 0
 	else
 		exit 1
@@ -42,7 +42,7 @@ if [[ $1 == create ]]; then
 		echo "not added! empty question" > /dev/stderr
 		exit 1
 	fi
-	assureDirExists "$HOME/.question"
+	#assureDirExists "$HOME/.question"
 	assureDirExists "$HOME/.question/questions"
 	touch "$HOME/.question/questions/$2"
 	chmod 705 "$HOME/.question/questions/$2"
