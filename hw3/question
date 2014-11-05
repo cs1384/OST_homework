@@ -42,6 +42,7 @@ if [[ $1 == create ]]; then
 		echo "not added! empty question" > /dev/stderr
 		exit 1
 	fi
+	assureDirExists "$HOME/.question"
 	assureDirExists "$HOME/.question/questions"
 	touch "$HOME/.question/questions/$2"
 	chmod 705 "$HOME/.question/questions/$2"
