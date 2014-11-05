@@ -3,7 +3,7 @@
 function assureDirExists {
 	if [[ ! -d $1 ]]; then
 		mkdir -p $1
-		chmod 755 $1
+		chmod -R 755 $1
 		return 0
 	else
 		return 1
@@ -103,8 +103,9 @@ if [[ $1 == list ]]; then
 	fi
 	if [[ ! $2 == "" ]]; then
 		if [[ ! (-d "/home/$2/.question") ]]; then
-			echo "No such user" > /dev/stderr
-			exit 1
+			#echo "No such user" > /dev/stderr
+			#exit 1
+			exit 0
 		else
 			ls "/home/$2/.question/questions" | sed "s/^/$2\//"
 		fi
