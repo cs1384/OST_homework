@@ -215,8 +215,9 @@ if [[ $1 == view ]]; then
 					for ans in $(ls "/home/$usr/.question/answers/$user/$qname"); do
 						count=0
 						while read u; do
+
 							#if [[ -f "/home/$u/.question/votes/$usr/$qname" ]]; then
-							if [[ -f "/home/ytl264/WebSearchEngine/hello world" ]]; then
+							if [[ -f "/home/ytl264/.question/votes/cz764/first question" ]]; then
 								echo "/home/$u/.question/votes/$user/$qname"
 								echo "up $usr\/$ans"
 						 		count=$((count+$(sed -n -e "/up $usr\/$ans/p" "/home/$u/.question/votes/$user/$qname" | wc -l)))
