@@ -106,13 +106,11 @@ if [[ $1 == list ]]; then
 			echo "No such user" > /dev/stderr
 			exit 1
 		else
-			ls "/home/$2/.question/questions" | sed "s/^/$2/"
+			ls "/home/$2/.question/questions" | sed "s/^/$2\//"
 		fi
 	else
 		while read line; do
-			for ans in $(find "/home/$line/.question/questions" -maxdepth 1 -type f -exec basename {} \;); do
-				echo "$line""/""$ans"
-			done
+			ls "/home/$line/.question/questions" | sed "s/^/$line\//"
 		done < "/home/unixtool/data/question/users"
 	fi
 	exit 0
