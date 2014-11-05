@@ -1,10 +1,10 @@
 #!/bin/bash
 
 function assureDirExists {
-	dir=$(echo $1 | sed -i -e 's/ /\\ /')
+	dir=$(echo $1 | sed -e 's/ /\\ /')
 	echo $dir
-	if [[ ! -d $1 ]]; then
-		mkdir -m 755 $1
+	if [[ ! -d $dir ]]; then
+		mkdir -m 755 $dir
 		return 0
 	else
 		return 1
@@ -94,9 +94,10 @@ if [[ $1 == answer ]]; then
 	assureDirExists "$HOME/.question/answers"
 	assureDirExists "$HOME/.question/answers/$user"
 	assureDirExists "$HOME/.question/answers/$user/$qname"
-	touch "$HOME/.question/answers/$user/$qname/$3"
-	chmod 705 "$HOME/.question/answers/$user/$qname/$3"
-	echo $content >> "$HOME/.question/answers/$user/$qname/$3"
+	file=$(echo "$HOME/.question/answers/$user/$qname/$3" | sed -e 's/ /\\ /g')
+	touch $file
+	chmod 705 $file
+	echo $content >> $file
 	exit 0
 fi
 
