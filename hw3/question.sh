@@ -22,7 +22,7 @@ if [[ $1 == create ]]; then
 		exit 1
 	fi
 	if [[ $2 = */* ]]; then
-		echo "Invalid arguments ""$2" > /dev/stderr
+		echo "Invalid arguments: ""$2" > /dev/stderr
 		exit 1
 	fi
 	if [[ -f $HOME/.question/questions/$2 ]]; then
@@ -57,7 +57,7 @@ if [[ $1 == answer ]]; then
 		exit 1
 	fi
 	if [[ ! $2 = */* ]]; then
-		echo "Invalid arguments ""$2" > /dev/stderr
+		echo "Invalid arguments: ""$2" > /dev/stderr
 		exit 1
 	fi
 	user=$(echo $2 | cut -d/ -f1)
@@ -123,11 +123,11 @@ if [[ $1 == vote ]]; then
 		exit 1
 	fi
 	if [[ !($2 = up || $2 = down) ]]; then
-		echo "Invalid arguments" > /dev/stderr
+		echo "Invalid arguments: ""$2" > /dev/stderr
 		exit 1
 	fi
 	if [[ ! $3 = */* ]]; then
-		echo "Invalid arguments" > /dev/stderr
+		echo "Invalid arguments: ""$2" > /dev/stderr
 		exit 1
 	fi
 	user=$(echo $3 | cut -d/ -f1)
@@ -145,13 +145,13 @@ if [[ $1 == vote ]]; then
 		echo $2 >> "$HOME/.question/votes/$user/$qname"
 	else
 		if [[ ! $4 = */* ]]; then
-			echo "Invalid arguments" > /dev/stderr
+			echo "Invalid arguments: ""$4" > /dev/stderr
 			exit 1
 		fi
 		auser=$(echo $4 | cut -d/ -f1)
 		aname=$(echo $4 | cut -d/ -f2)
 		if [[ ! -f "/home/$auser/.question/answers/$user/$qname/$aname" ]]; then
-			echo "The answer id does note exist" > /dev/stderr
+			echo "The answer does note exist" > /dev/stderr
 			exit 1
 		fi
 		assureDirExists "$HOME/.question/votes/$user"
@@ -165,7 +165,7 @@ if [[ $1 == vote ]]; then
 fi
 
 if [[ $1 == view ]]; then
-	if [ $# -ne 2 ]; then
+	if [ $# -lt 2 ]; then
 		echo "The wrong number of arguments are given to an option (too few 
 			or too many)" > /dev/stderr
 		exit 1
