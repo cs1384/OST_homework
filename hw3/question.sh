@@ -191,7 +191,6 @@ if [[ $1 == view ]]; then
 						count=0
 						while read u; do
 							if [[ -f "/home/$u/.question/votes/$usr/$qname" ]]; then
-								echo "/home/$u/.question/votes/$usr/$qname"
 						 		count=$((count+$(sed -n -e "/up $usr\/$ans/p" "/home/$u/.question/votes/$user/$qname" | wc -l)))
 						 		count=$((count-$(sed -n -e "/down $usr\/$ans/p" "/home/$u/.question/votes/$user/$qname" | wc -l)))
 							fi
