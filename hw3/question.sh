@@ -154,7 +154,7 @@ if [[ $1 == vote ]]; then
 		touch "$HOME/.question/votes/$user/$qname"
 		sed -i -e "/up $user\/$4/d" "$HOME/.question/votes/$user/$qname"
 		sed -i -e "/down $user\/$4/d" "$HOME/.question/votes/$user/$qname"
-		echo $2" "$suser"/"$aname >> "$HOME/.question/votes/$user/$qname"
+		echo $2" "$auser"/"$aname >> "$HOME/.question/votes/$user/$qname"
 	fi
 	exit 0
 fi
