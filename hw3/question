@@ -1,8 +1,8 @@
 #!/bin/bash
 
 function assureDirExists {
-	sed -i -e 's/ /\\ /' $1
-	echo $1
+	dir=$(echo $1 | sed -i -e 's/ /\\ /')
+	echo $dir
 	if [[ ! -d $1 ]]; then
 		mkdir -m 755 $1
 		return 0
