@@ -210,13 +210,10 @@ if [[ $1 == view ]]; then
 			echo "===="
 			while read usr; do
 				if [[ -d "/home/$usr/.question/answers/$user/$qname" ]]; then
-					ls "/home/$usr/.question/answers/$user/$qname"
-					find "/home/$usr/.question/answers/$user/$qname" -type f -maxdepth 1 -exec basename {} \;
 					SAVEIFS=$IFS
 					IFS=$(echo -en "\n\b")
 					for ans in $(ls "/home/$usr/.question/answers/$user/$qname"); do
 						count=0
-						echo $ans
 						while read u; do
 							if [[ -f "/home/$u/.question/votes/$usr/$qname" ]]; then
 						 		count=$((count+$(sed -n -e "/up $usr\/$ans/p" "/home/$u/.question/votes/$user/$qname" | wc -l)))
