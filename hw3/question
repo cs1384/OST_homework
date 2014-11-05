@@ -105,6 +105,10 @@ if [[ $1 == list ]]; then
 		exit 1
 	fi
 	if [[ ! $2 == "" ]]; then
+		if [[ $2 = */* ]]; then
+			echo "Invalid arguments: ""$2" > /dev/stderr
+			exit 1
+		fi
 		if [[ ! (-d "/home/$2/.question") ]]; then
 			#echo "No such user" > /dev/stderr
 			#exit 1
@@ -131,7 +135,7 @@ if [[ $1 == vote ]]; then
 		exit 1
 	fi
 	if [[ ! $3 = */* ]]; then
-		echo "Invalid arguments: ""$2" > /dev/stderr
+		echo "Invalid arguments: ""$3" > /dev/stderr
 		exit 1
 	fi
 	user=$(echo $3 | cut -d/ -f1)
